@@ -1,0 +1,12 @@
+import { Link } from '@tanstack/react-router';
+
+export const Nav = () => {
+    return (
+        <nav>
+            <Link to='/'>Home</Link>
+            <Link to='/gallery'>Gallery</Link>
+            <Link to='/search'>Search</Link>
+            <Link to='/account'>Account</Link>;
+        </nav>
+    )
+}

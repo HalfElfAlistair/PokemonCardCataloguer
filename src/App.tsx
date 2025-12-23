@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 
-export const App: FunctionalComponent = () => {
-
+export const App = () => {
   return (
-    <></>
+    <>Home</>
   )
 }
