@@ -9,14 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SearchRouteImport } from './routes/search'
+import { Route as PasswordResetRouteImport } from './routes/password-reset'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 
-const SearchRoute = SearchRouteImport.update({
-  id: '/search',
-  path: '/search',
+const PasswordResetRoute = PasswordResetRouteImport.update({
+  id: '/password-reset',
+  path: '/password-reset',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -39,43 +39,43 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/gallery': typeof GalleryRoute
-  '/search': typeof SearchRoute
+  '/password-reset': typeof PasswordResetRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/gallery': typeof GalleryRoute
-  '/search': typeof SearchRoute
+  '/password-reset': typeof PasswordResetRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
   '/gallery': typeof GalleryRoute
-  '/search': typeof SearchRoute
+  '/password-reset': typeof PasswordResetRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/account' | '/gallery' | '/search'
+  fullPaths: '/' | '/account' | '/gallery' | '/password-reset'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/account' | '/gallery' | '/search'
-  id: '__root__' | '/' | '/account' | '/gallery' | '/search'
+  to: '/' | '/account' | '/gallery' | '/password-reset'
+  id: '__root__' | '/' | '/account' | '/gallery' | '/password-reset'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
   GalleryRoute: typeof GalleryRoute
-  SearchRoute: typeof SearchRoute
+  PasswordResetRoute: typeof PasswordResetRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/search': {
-      id: '/search'
-      path: '/search'
-      fullPath: '/search'
-      preLoaderRoute: typeof SearchRouteImport
+    '/password-reset': {
+      id: '/password-reset'
+      path: '/password-reset'
+      fullPath: '/password-reset'
+      preLoaderRoute: typeof PasswordResetRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -106,7 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
   GalleryRoute: GalleryRoute,
-  SearchRoute: SearchRoute,
+  PasswordResetRoute: PasswordResetRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
