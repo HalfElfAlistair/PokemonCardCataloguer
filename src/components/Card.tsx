@@ -34,15 +34,21 @@ export const Card = ({ cardID, cardClass }: cardProps) => {
 
     return (
         <>
-            <div className='cardContainerSmall' onClick={() => updateCardModalOpen()}>
-                {cardID !== 'empty' && (
+            {cardID !== 'empty' ? (
+                <button
+                    className='btnTransparent cardContainerSmall'
+                    onClick={() => updateCardModalOpen()}
+                    aria-label={`Click on this card to see a larger version and some additional details`}
+                >
                     <img
                         src={cardsObject[cardID].images.small}
                         className={cardClass}
                         alt={`Picture of ${cardsObject[cardID].name} card, id: ${cardsObject[cardID].id}`}
                     />
-                )}
-            </div>
+                </button>
+            ) : (
+                <div className='cardContainerSmall' />
+            )}
 
             {cardModalOpen && (
                 <CardModal cardID={cardID} updateCardModalOpen={updateCardModalOpen} />
