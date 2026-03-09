@@ -33,7 +33,7 @@ export const Account = () => {
     const { user } = useAuth();
 
     return (
-        <div className="flex-center accountContainer">
+        <main className="flex-center accountContainer" role="main">
             {user ? (
                 <div className='formGlobal'>
 
@@ -82,6 +82,6 @@ export const Account = () => {
                 </form>
             )
             }
-        </div >
+        </main >
     )
 }

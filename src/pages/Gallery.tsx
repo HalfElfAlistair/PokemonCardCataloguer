@@ -106,9 +106,9 @@ export const Gallery = () => {
 
 
     return (
-        <div className="flex-center flex-wrap">
+        <main className="flex-center flex-wrap" role="main">
             <GallerySearch />
             {!sortFilterModalOpen && <CardsList cardsToDisplay={filteredCards} />}
-        </div>
+        </main>
     )
 }

@@ -13,8 +13,10 @@ interface DropdownProps {
 
 export const Dropdown = ({ id, type, placeholder, options, selectedOptions, updater, dropdownClass, dropdownOpen }: DropdownProps) => {
     const { updatedropdownOpenList } = useSortFilterStates();
-    const updateSelectedItems = (checked: boolean, option: string) => {
+
+    const updateSelectedItems = (option: string) => {
         if (type === 'checkbox') {
+            let checked = !selectedOptions.includes(option);
             let selectedOptionsCopy = [...selectedOptions];
             if (checked) {
                 selectedOptionsCopy.push(option);
@@ -23,10 +25,10 @@ export const Dropdown = ({ id, type, placeholder, options, selectedOptions, upda
             }
             updater(selectedOptionsCopy);
         } else {
-            if (checked) {
-                updater(option);
-            } else {
+            if (selectedOptions[0] === option) {
                 updater('');
+            } else {
+                updater(option);
             }
         }
     }
@@ -35,25 +37,22 @@ export const Dropdown = ({ id, type, placeholder, options, selectedOptions, upda
             <button className={`dropdownButton btnOutline ${dropdownOpen ? 'dropdownOpen' : 'dropdownClosed'}`} onClick={() => updatedropdownOpenList(id)}>{dropdownOpen ? 'Close' : 'Open'} {placeholder}</button>
             {dropdownOpen && (
                 <div className='dropdownListContainer'>
-                    <ul className='dropdownList'>
+                    <div className='dropdownList'>
                         {options.map(option => {
                             return (
-                                <li key={option} className={`${dropdownClass} ${selectedOptions.includes(option) ? 'dropdownChecked' : 'dropdownUnchecked'}`}>
-                                    <label className='dropdownListItemLabel'>
-                                        <input
-                                            type='checkbox'
-                                            className='hiddenCheckbox'
-                                            onChange={(e) => updateSelectedItems(e.target.checked, option)}
-                                            checked={selectedOptions.includes(option)}
-                                        />
-                                        {option}
-                                    </label>
-                                </li>
+                                <button
+                                    key={option}
+                                    className={`btnTransparent ${dropdownClass} ${selectedOptions.includes(option) ? 'dropdownChecked' : 'dropdownUnchecked'}`}
+                                    onClick={(e) => updateSelectedItems(option)}
+                                >
+                                    {option}
+                                </button>
                             )
                         })}
-                    </ul>
+                    </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     )
 }
