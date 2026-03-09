@@ -1,6 +1,6 @@
 // Data acquired from pokemontcg.io
 export const staticData = {
-    owned: {
+    cards: {
         "base1-44": {
             "id": "base1-44",
             "name": "Bulbasaur",
@@ -1043,10 +1043,9 @@ export const staticData = {
                     }
                 }
             }
-        }
-    },
-    unobtained: {
+        },
         "sv3pt5-93": {
+            "count": 0,
             "id": "sv3pt5-93",
             "name": "Haunter",
             "supertype": "Pokémon",
@@ -1174,6 +1173,7 @@ export const staticData = {
             }
         },
         "sv3pt5-94": {
+            "count": 0,
             "id": "sv3pt5-94",
             "name": "Gengar",
             "supertype": "Pokémon",
