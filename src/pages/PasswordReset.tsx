@@ -33,7 +33,7 @@ export const PasswordReset = () => {
     }
 
     return (
-        <div className="flex-center accountContainer">
+        <main className="flex-center accountContainer" role="main">
             <div className='formGlobal'>
                 {!user && (
                     <TextInput
@@ -61,6 +61,6 @@ export const PasswordReset = () => {
                     <p className='passwordResetSuccess'>{passwordResetSuccess}</p>
                 )}
             </div>
-        </div>
+        </main>
     )
 }
