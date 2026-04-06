@@ -43,7 +43,7 @@ export const Dropdown = ({ id, type, placeholder, options, selectedOptions, upda
                                 <button
                                     key={option}
                                     className={`btnTransparent ${dropdownClass} ${selectedOptions.includes(option) ? 'dropdownChecked' : 'dropdownUnchecked'}`}
-                                    onClick={(e) => updateSelectedItems(option)}
+                                    onClick={() => updateSelectedItems(option)}
                                 >
                                     {option}
                                 </button>

@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail, onIdTokenChanged, onAuthStateChanged, type User } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail, onIdTokenChanged, type User } from "firebase/auth";
 import { auth } from '../firebase/firebase';
 
 export type SignInResult = {

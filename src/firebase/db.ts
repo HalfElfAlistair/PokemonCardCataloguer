@@ -65,14 +65,6 @@ export const fetchListByName = async (uid: string, listName: string) => {
     return await getDoc(listRef(uid, listName))
 }
 
-export const fetchUserDecks = (uid: string) => {
-    return {}
-}
-
-export const fetchUserSets = (uid: string) => {
-    return {}
-}
-
 
 // add requests
 
