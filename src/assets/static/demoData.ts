@@ -1,5 +1,7 @@
+import type { Data } from "../../types/dataTypes";
+
 // Data acquired from pokemontcg.io
-export const staticData = {
+export const demoData: Data = {
     cards: {
         "base1-2": {
             "category": "Pokemon",
@@ -1820,11 +1822,14 @@ export const staticData = {
         },
     },
     lists: {
-        favourites: [
-            "sv03.5-092",
-            "sv03.5-093",
-            "sv03.5-094"
-        ]
+        "favourites": {
+            name: "favourites",
+            cardIDs: [
+                "sv03.5-092",
+                "sv03.5-093",
+                "sv03.5-094"
+            ]
+        },
     },
     decks: {},
     sets: {
