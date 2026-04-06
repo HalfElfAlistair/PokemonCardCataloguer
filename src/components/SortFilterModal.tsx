@@ -3,27 +3,22 @@ import { useSortFilterStates } from '../state/sortFilterContext';
 import { TextInput } from "./TextInput";
 import { useState } from "react";
 import { useAuth } from '../state/auth-context';
+import { getPlaceholderText } from '../helpers';
+import { useLocation } from '@tanstack/react-router';
 export const SortFilterModal = () => {
 
     const { user } = useAuth();
+    const { pathname } = useLocation();
 
-    const { dropdownOpenList, searchText, defaultTypes, filterByType, setFilterByType, defaultStages, filterByStage, setFilterByStage, sortOptions, sortBy, updateSortBy, toggleSortFilterModal } = useSortFilterStates();
+    const { dropdownOpenList, searchText, defaultTypes, filterByType, setFilterByType, defaultStages, filterByStage, setFilterByStage, sortOptions, sortBy, updateSortBy } = useSortFilterStates();
 
     const [inputText, setinputText] = useState(searchText ? searchText : "");
     const updateInputText = (val: string) => {
         setinputText(val);
     }
 
-    const getPlaceholderText = () => {
-        if (user) {
-            return 'Card name or code';
-        } else {
-            return window.outerWidth > 380 ? 'Try searching for Haunter' : 'Search Haunter';
-        }
-    }
-
     return (
-        <div className='sortFilterModal'>
+        <div className={`sortFilterModal ${pathname === '/search' ? 'sortFilterModalSearch' : 'sortFilterModalGallery'}`}>
             <div className='modalContentContainer'>
                 <div className='modalContentInnerContainer'>
                     <div className='searchSortContainer'>
@@ -34,7 +29,7 @@ export const SortFilterModal = () => {
                                 inputType='text'
                                 labelText='Enter card name or code, then press the search button'
                                 inputClass='searchTextInput'
-                                placeholderText={getPlaceholderText()}
+                                placeholderText={getPlaceholderText(user ? true : false, window.innerWidth, 'name')}
                                 inputValue={inputText}
                                 updateFunction={updateInputText}
                                 validFormat={true}
