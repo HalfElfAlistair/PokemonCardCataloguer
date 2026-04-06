@@ -19,7 +19,7 @@ type filterCardsParams = {
     idToken: string | null;
 }
 
-export const filterCards = ({ cardsData, searchText, filterByType, defaultTypes, filterByStage, sortBy, searchFormat, idToken }: filterCardsParams) => {
+export const filterCards = ({ cardsData, searchText, filterByType, defaultTypes, filterByStage, sortBy, searchFormat }: filterCardsParams) => {
 
     return Object.keys(cardsData)
         .filter(cardID => {
