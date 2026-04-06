@@ -31,7 +31,13 @@ const listRef = (uid: string, listName: string) => {
 }
 
 
+export const fetchUserDecks = () => {
+    return {};
+}
 
+export const fetchUserSets = () => {
+    return {};
+}
 
 
 // get requests
