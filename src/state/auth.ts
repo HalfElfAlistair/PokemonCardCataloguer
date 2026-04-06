@@ -1,4 +1,4 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, type User } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, sendPasswordResetEmail, onIdTokenChanged, onAuthStateChanged, type User } from "firebase/auth";
 import { auth } from '../firebase/firebase';
 
 export type SignInResult = {
@@ -20,10 +20,9 @@ export const signOutProcess = () => {
 }
 
 export const authStateListener = (callback: (user: User | null) => void) => {
-    return onAuthStateChanged(auth, callback);
+    return onIdTokenChanged(auth, callback);
 };
 
-// console.log('auth email', auth['currentUser'].email)
 
 export const resetPassword = (email: string) => {
     return sendPasswordResetEmail(auth, email)
@@ -32,6 +31,4 @@ export const resetPassword = (email: string) => {
         }).catch(() => {
             return false;
         })
-    // return true;
 }
-// sendPasswordResetEmail(auth, email)
