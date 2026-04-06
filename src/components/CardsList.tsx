@@ -28,7 +28,17 @@ export const CardsList = () => {
     // produces an array of filtered and sorted cardIDs, counts then adds empty cards for formatting
     const cardIDs = isSearch ? Object.keys(cardsData) : filterCards({ cardsData, searchText, filterByType, defaultTypes, filterByStage, sortBy, searchFormat, idToken });
     const filteredCardsCount = cardIDs.length;
-    const freeColumns = 3 - (filteredCardsCount % 3);
+    const windowWidth = window.innerWidth;
+    let columnsCount: number = 3;
+    if (windowWidth > 705) {
+        columnsCount = 4;
+    } else if (windowWidth > 936) {
+        columnsCount = 5;
+    } else {
+        columnsCount = 3;
+    }
+
+    const freeColumns = columnsCount - (filteredCardsCount % columnsCount);
     if (freeColumns !== 0) {
         for (let i = 0; i < freeColumns; i++) {
             cardIDs.push('empty')
