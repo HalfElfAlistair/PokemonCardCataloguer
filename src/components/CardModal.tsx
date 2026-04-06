@@ -4,86 +4,109 @@ import { MinusIcon } from "../assets/svg/MinusIcon";
 import { useAuth } from '../state/auth-context';
 import { useUserData } from '../state/cardsDataQuery';
 import { useData } from '../state/cardsDataContext';
-import { useSortFilterStates } from '../state/sortFilterContext';
 import { CloseIcon } from "../assets/svg/CloseIcon";
+import { convertImageURL } from '../helpers';
+import { checkDBAndAddNewCard } from "../api/functions";
+import { useLocation } from '@tanstack/react-router';
+import { updateCardCount, updateList } from "../firebase/db";
+import { CardUpdateError } from "./CardUpdateError";
+import { useState } from "react";
 
-interface cardModalProps {
+type CardModalProps = {
     cardID: string;
     updateCardModalOpen: Function;
 }
 
-
-
-export const CardModal = ({ cardID, updateCardModalOpen }: cardModalProps) => {
+export const CardModal = ({ cardID, updateCardModalOpen }: CardModalProps) => {
 
     // gets auth user
-    const { user } = useAuth();
+    const { user, idToken } = useAuth();
     // gets demo data
-    const { data: demoData, setData } = useData();
+    const { data: demoData, setData, cardSearchData } = useData();
     // gets firestore data
     const { data: userData } = useUserData();
     // Conditional determines whether user logged in to use data from firestore or demo data
     const dataToUse = user ? userData : demoData;
 
-    const { searchText } = useSortFilterStates();
+    const { cards, lists } = dataToUse;
 
-    const { owned, unobtained, lists } = dataToUse;
-    let cardsObject = { ...owned };
-    if (searchText.length > 0) {
-        cardsObject = { ...owned, ...unobtained }
+    const { pathname } = useLocation();
+    let cardData = pathname === '/search' ? cardSearchData[cardID] : cards[cardID];
+    const { count, image, name } = cardData;
+
+    const [cardUpdateError, setCardUpdateError] = useState(false);
+
+    const shouldCheckCardPresenceOnUpdate = count === undefined ? true : false;
+
+    const { favourites } = lists;
+
+    const isFavourite = favourites && favourites.cardIDs.includes(cardID);
+
+    const updateCount = async (increment: boolean) => {
+        let dataToUseCopy = { ...dataToUse };
+        let uid;
+        if (user) {
+            uid = user['uid'];
+        }
+        if (increment) {
+            // add card to data copy if new
+            if (!dataToUseCopy['cards'][cardID]) {
+                dataToUseCopy['cards'][cardID] = cardData;
+            }
+            if (count !== undefined) {
+                dataToUseCopy['cards'][cardID]['count'] = count + 1;
+            } else {
+                dataToUseCopy['cards'][cardID]['count'] = 1;
+            }
+        } else {
+            if (count > 0) {
+                dataToUseCopy['cards'][cardID]['count'] = count - 1;
+            }
+        }
+        // if logged in, update db
+        if (uid && idToken) {
+            if (shouldCheckCardPresenceOnUpdate) {
+                const cardAdded = await checkDBAndAddNewCard({ idToken, uid, cardID, countModifier: 1 });
+                if (cardAdded === 'error') {
+                    setCardUpdateError(true);
+                }
+            } else {
+                const countModifier = increment ? 1 : -1;
+                const countValue = count + countModifier;
+                // update firebase asynchronously
+                updateCardCount(uid, cardID, countValue);
+            }
+        }
+        setData(dataToUseCopy);
     }
 
-    const { count, images, name, id } = cardsObject[cardID]
-    const { favourites } = lists
-
-    const updateCount = (increment: boolean) => {
+    const updateFavourites = async () => {
+        let uid;
+        if (user) {
+            uid = user['uid'];
+        }
         let dataToUseCopy = { ...dataToUse };
-        if (increment) {
-            if (count) {
-                dataToUseCopy.owned[cardID]['count'] = count + 1;
-            } else {
-                // when no count data is present, the card and count will need to be added to the owned data
-                dataToUseCopy.owned[cardID] = cardsObject[cardID];
-                dataToUseCopy.owned[cardID]['count'] = 1;
-                if (dataToUseCopy.unobtained[cardID]) {
-                    delete dataToUseCopy.unobtained[cardID];
+        if (isFavourite) {
+            dataToUseCopy.lists.favourites.cardIDs.splice(favourites.cardIDs.indexOf(cardID), 1)
+        } else {
+            dataToUseCopy.lists.favourites.cardIDs.push(cardID);
+        }
+        if (uid) {
+            // update firebase asynchronously
+            updateList(uid, "favourites", dataToUseCopy.lists.favourites)
+        }
+        setData(dataToUseCopy);
+        if (shouldCheckCardPresenceOnUpdate) {
+            if (uid && idToken) {
+                const cardAdded = await checkDBAndAddNewCard({ idToken, uid, cardID, countModifier: 0 });
+                if (cardAdded === 'error') {
+                    setCardUpdateError(true);
                 }
             }
-
-        } else {
-            if (count === 1) {
-                // when count is reduced to 0, the card will move from owned data to unobtained, thus not showing in gallery
-                // dataToUseCopy.owned[cardID]['count'] = count - 1;
-                delete dataToUseCopy.owned[cardID]['count'];
-                dataToUseCopy.unobtained[cardID] = cardsObject[cardID];
-                delete dataToUseCopy.owned[cardID];
-            } else if (count > 1) {
-                // decrements as normal
-                dataToUseCopy.owned[cardID]['count'] = count - 1;
-            }
         }
-        if (user) {
-            // update firebase
-            console.log('update firebase')
-        }
-        setData(dataToUseCopy);
     }
 
-    const updateFavourites = () => {
-        let dataToUseCopy = { ...dataToUse };
-        if (favourites.includes(cardID)) {
-            dataToUseCopy.lists.favourites.splice(favourites.indexOf(cardID), 1)
-        } else {
-            dataToUseCopy.lists.favourites.push(cardID);
-        }
-        if (user) {
-            // update firebase
-            console.log('update firebase')
-        }
-        setData(dataToUseCopy);
-    }
-
-    const favouriteLabel = `Press to ${favourites.includes(cardID) ? 'remove from' : 'add to'} your favourite cards`;
+    const favouriteLabel = `Press to ${isFavourite ? 'remove from' : 'add to'} your favourite cards`;
     const closeModalLabel = 'Press to close this card view and return to the gallery';
     const countButtonLabel = (str: string) => {
         return `Press to ${str} the number of this card that you have`;
@@ -94,7 +117,7 @@ export const CardModal = ({ cardID, updateCardModalOpen }: cardModalProps) => {
             id: 'starIcon',
             event: updateFavourites,
             label: favouriteLabel,
-            icon: <StarIcon iconClass='starIcon' favourite={favourites.includes(cardID) ? true : false} />
+            icon: <StarIcon iconClass='starIcon' favourite={isFavourite ? true : false} />
         },
         {
             id: 'exposedIcon',
@@ -143,9 +166,9 @@ export const CardModal = ({ cardID, updateCardModalOpen }: cardModalProps) => {
                 </div>
                 <div className='cardContainerLarge'>
                     <img
-                        src={images.large}
+                        src={convertImageURL(image)}
                         className='cardImage'
-                        alt={`Picture of ${name} card, id: ${id}`}
+                        alt={`Picture of ${name} card, id: ${cardID}`}
                     />
                 </div>
                 <div className='cardCountContainer'>
@@ -153,7 +176,7 @@ export const CardModal = ({ cardID, updateCardModalOpen }: cardModalProps) => {
                         if (typeof item === 'string') {
                             return (
                                 <div key='cardCount'>
-                                    <p>{count}</p>
+                                    <p>{count ? count : 0}</p>
                                 </div>
                             )
                         } else {
@@ -175,6 +198,7 @@ export const CardModal = ({ cardID, updateCardModalOpen }: cardModalProps) => {
                     })}
                 </div>
             </div>
+            {cardUpdateError && <CardUpdateError setCardUpdateError={setCardUpdateError} />}
         </div>
     );
 }
