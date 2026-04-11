@@ -5,8 +5,8 @@ interface DropdownOpenListProps {
 }
 
 type SortFilterContextValue = {
-  sortFilterModalOpen: boolean;
-  toggleSortFilterModal: () => void;
+  cardsListOptionsOpen: boolean;
+  toggleCardsListOptionsState: () => void;
 
   dropdownOpenList: DropdownOpenListProps;
   updatedropdownOpenList: (id: string) => void;
@@ -40,12 +40,12 @@ const SortFilterContext = createContext<SortFilterContextValue | undefined>(unde
 
 export const SortFilterProvider = ({ children }: { children: ReactNode }) => {
 
-  // is the modal open
-  const [sortFilterModalOpen, setSortFilterModalOpen] = useState(false);
-  const toggleSortFilterModal = () => {
-    setSortFilterModalOpen(!sortFilterModalOpen)
-    // close any open sort/filter dropdowns when the modal is closed
-    if (sortFilterModalOpen === false) {
+  // are the cards list options open
+  const [cardsListOptionsOpen, setCardsListOptionsOpen] = useState(false);
+  const toggleCardsListOptionsState = () => {
+    setCardsListOptionsOpen(!cardsListOptionsOpen)
+    // close any open sort/filter dropdowns when the cards list options are closed
+    if (cardsListOptionsOpen === false) {
       resetDropdownOpenList();
     }
   }
@@ -59,7 +59,7 @@ export const SortFilterProvider = ({ children }: { children: ReactNode }) => {
       dropdownOpenListCopy[id] = false;
     } else {
       for (const dropdownID in dropdownOpenListCopy) {
-        // close any other open dropdowns in modal
+        // close any other open dropdowns in cards list options
         if (dropdownID === id) {
           dropdownOpenListCopy[dropdownID] = true;
         } else {
@@ -120,7 +120,7 @@ export const SortFilterProvider = ({ children }: { children: ReactNode }) => {
   const [currentPage, setCurrentPage] = useState<string | null>(null);
   // reset states when changing between search and gallery page
   useEffect(() => {
-    setSortFilterModalOpen(false);
+    setCardsListOptionsOpen(false);
     resetDropdownOpenList();
     resetSearchText();
     resetTypeFilter();
@@ -135,8 +135,8 @@ export const SortFilterProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SortFilterContext.Provider
       value={{
-        sortFilterModalOpen,
-        toggleSortFilterModal,
+        cardsListOptionsOpen,
+        toggleCardsListOptionsState,
 
         dropdownOpenList,
         updatedropdownOpenList,

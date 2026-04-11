@@ -269,19 +269,19 @@ img {
   height: 100%;
 }
 
-.modalToggleButton {
+.cardsListOptionsToggleButton {
   width: 60px;
 }
 
 .cardsList {
   width: 90%;
-  padding: 5% 0;
   gap: 5%;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   max-height: 70vh;
   overflow-y: scroll;
+  margin-top: 15px;
 }
 
 .cardContainerSmall {
@@ -289,24 +289,12 @@ img {
   margin-bottom: 5%;
 }
 
-.sortFilterModal {
+.cardsListOptions {
   width: 100vw;
-  position: fixed;
-  z-index: 2;
-  bottom: 0;
-  left: 0;
-  backdrop-filter: blur(5px);
-}
-
-.sortFilterModalSearch {
-  height: 70vh;
-}
-
-.sortFilterModalGallery {
   height: 80vh;
 }
 
-.modalContentContainer {
+.cardsListOptionsContainer {
   background: linear-gradient(285deg, rgba(0, 14, 15, 1) 0%, rgba(0, 33, 36, 1) 27%, rgba(0, 33, 36, 1) 77%, rgba(0, 14, 15, 1) 100%);
   width: 100%;
   height: 100%;
@@ -314,15 +302,16 @@ img {
   overflow: auto;
 }
 
-.modalContentInnerContainer {
+.cardsListOptionsContainerInner {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   overflow-y: scroll;
   margin: 0 5%;
+  justify-content: space-evenly;
 }
 
-.modalSection {
+.cardsListSection {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -551,6 +540,14 @@ img {
   color: #BABABA;
 }
 
+.sortFilterToggleContainer {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes PokeBallAnimation {
   0% {
     transform: rotate(0deg);
@@ -580,7 +577,7 @@ img {
 }
 
 @media only screen and (min-width: 450px) {
-  .modalSection {
+  .cardsListSection {
     width: 370px;
   }
 
@@ -596,8 +593,12 @@ img {
     width: 135px;
   }
 
-  .modalToggleButton {
+  .cardsListOptionsToggleButton {
     width: 80px;
+  }
+
+  .cardsList {
+    margin-top: 30px;
   }
 
   .searchInput {
@@ -611,7 +612,7 @@ img {
 }
 
 @media only screen and (min-width: 800px) {
-  .modalSection {
+  .cardsListSection {
     margin: 0 5%;
   }
 }
@@ -635,10 +636,6 @@ img {
     border-color: #BABABA;
   }
 
-  .modalContentInnerContainer {
-    justify-content: space-evenly;
-  }
-
   .searchTextInput,
   .dropdownButton {
     margin: 0;
@@ -650,7 +647,7 @@ img {
     width: 370px;
   }
 
-  .modalFilter,
+  .cardsListFilter,
   .searchSortContainer {
     width: 777px;
     margin: 0;
@@ -660,17 +657,19 @@ img {
     justify-content: space-between;
   }
 
-  .modalSearch,
-  .modalSort {
+  /*  */
+
+  .cardsListSearch,
+  .cardsListSort {
     margin: 0;
     display: flex;
   }
 
-  .modalSearch {
+  .cardsListSearch {
     height: fit-content;
   }
 
-  .modalSection,
+  .sortFilterSection,
   .searchSortContainer {
     align-content: start;
   }

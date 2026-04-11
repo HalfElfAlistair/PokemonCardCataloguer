@@ -1,14 +1,19 @@
 import { useSortFilterStates } from '../state/sortFilterContext';
-import { GallerySearch } from '../components/GallerySearch';
 import { CardsList } from '../components/CardsList';
+import { CardsListOptionsToggle } from '../components/CardsListOptionsToggle';
+import { CardsListOptions } from '../components/CardsListOptions';
 
 export const Gallery = () => {
-    const { sortFilterModalOpen } = useSortFilterStates();
+    const { cardsListOptionsOpen } = useSortFilterStates();
 
     return (
         <main className="flex-center flex-wrap" role="main">
-            <GallerySearch />
-            {!sortFilterModalOpen && <CardsList />}
+            <CardsListOptionsToggle />
+            {cardsListOptionsOpen ? (
+                <CardsListOptions />
+            ) : (
+                <CardsList />
+            )}
         </main>
     )
 }

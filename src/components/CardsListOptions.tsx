@@ -4,11 +4,9 @@ import { TextInput } from "./TextInput";
 import { useState } from "react";
 import { useAuth } from '../state/auth-context';
 import { getPlaceholderText } from '../helpers';
-import { useLocation } from '@tanstack/react-router';
-export const SortFilterModal = () => {
+export const CardsListOptions = () => {
 
     const { user } = useAuth();
-    const { pathname } = useLocation();
 
     const { dropdownOpenList, searchText, defaultTypes, filterByType, setFilterByType, defaultStages, filterByStage, setFilterByStage, sortOptions, sortBy, updateSortBy } = useSortFilterStates();
 
@@ -18,11 +16,11 @@ export const SortFilterModal = () => {
     }
 
     return (
-        <div className={`sortFilterModal ${pathname === '/search' ? 'sortFilterModalSearch' : 'sortFilterModalGallery'}`}>
-            <div className='modalContentContainer'>
-                <div className='modalContentInnerContainer'>
+        <div className='cardsListOptions'>
+            <div className='cardsListOptionsContainer'>
+                <div className='cardsListOptionsContainerInner'>
                     <div className='searchSortContainer'>
-                        <div className='modalSection modalSearch'>
+                        <div className='cardsListSection cardsListSearch'>
                             <h2>Search</h2>
                             <TextInput
                                 formID='cardSearch'
@@ -36,8 +34,8 @@ export const SortFilterModal = () => {
                                 formatMessage=''
                             />
                         </div>
-                        <div className='modalSection modalSort'>
-                            <h2 className='modalHeadings'>Sort</h2>
+                        <div className='cardsListSection cardsListSort'>
+                            <h2>Sort</h2>
                             <Dropdown
                                 id='sortSelect'
                                 type='radio'
@@ -51,8 +49,8 @@ export const SortFilterModal = () => {
                         </div>
                     </div>
 
-                    <div className='modalSection modalFilter'>
-                        <h2 className='modalHeadings'>Filter</h2>
+                    <div className='cardsListSection cardsListFilter'>
+                        <h2>Filter</h2>
                         <Dropdown
                             id='typeFilter'
                             type='checkbox'
