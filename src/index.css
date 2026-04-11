@@ -160,7 +160,7 @@ img {
 .gallerySearch {
   width: 100%;
   height: 10vh;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .btn {
@@ -406,14 +406,30 @@ img {
 .cardCountContainer,
 .cardActionsContainer {
   width: 100%;
-  max-width: 300px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  margin: 0;
+  height: 10vh;
 }
 
+.cardActionsContainer,
+.cardContainerLarge,
 .cardCountContainer {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.cardCountContainerInner,
+.cardActionsContainerInner {
+  width: 100%;
+  max-width: 300px;
+  height: 45px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardCountContainerInner {
   color: #16C057;
   font-size: 16px;
   font-weight: bold;
@@ -422,16 +438,16 @@ img {
 }
 
 .cardModalContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   height: 100vh;
-  padding: 15px;
+  padding: 0 15px;
   box-sizing: border-box;
-  gap: 0.5rem;
 }
 
 .cardContainerLarge {
+  height: 80vh;
+}
+
+.cardContainerLargeInner {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -453,15 +469,6 @@ img {
 
 .cardImageSmall {
   border-radius: 3px;
-}
-
-.cardActionsContainer,
-.cardCountContainer {
-  height: 45px;
-  width: 100%;
-  max-width: 300px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .searchPageContentContainer,
@@ -597,7 +604,7 @@ img {
   }
 
   .cardModalContainer {
-    padding: 30px;
+    padding: 0 30px;
   }
 }
 
@@ -671,7 +678,7 @@ img {
   }
 
   .cardModalContainer {
-    padding: 45px;
+    padding: 0 45px;
   }
 }
 
@@ -681,13 +688,13 @@ img {
   }
 
   .cardModalContainer {
-    padding: 50px;
+    padding: 0 50px;
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .cardModalContainer {
-    padding: 60px;
+    padding: 0 60px;
   }
 
   .gallerySearch {

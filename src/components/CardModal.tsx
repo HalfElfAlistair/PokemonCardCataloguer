@@ -149,53 +149,59 @@ export const CardModal = ({ cardID, updateCardModalOpen }: CardModalProps) => {
         <div className='cardModal'>
             <div className='cardModalContainer'>
                 <div className='cardActionsContainer'>
-                    {cardActions.map(action => {
-                        const { id, event, label, icon } = action;
-                        return (
-                            <button
-                                key={id}
-                                className='btnTransparent cardActionsButton'
-                                onClick={() => event()}
-                                title={label}
-                                aria-label={label}
-                            >
-                                {icon}
-                            </button>
-                        )
-                    })}
-                </div>
-                <div className='cardContainerLarge'>
-                    <img
-                        src={convertImageURL(image)}
-                        className='cardImage'
-                        alt={`Picture of ${name} card, id: ${cardID}`}
-                    />
-                </div>
-                <div className='cardCountContainer'>
-                    {countButtons.map(item => {
-                        if (typeof item === 'string') {
-                            return (
-                                <div key='cardCount'>
-                                    <p>{count ? count : 0}</p>
-                                </div>
-                            )
-                        } else {
-                            const { buttonClass, event, disabled, label, icon } = item;
-                            const labelText = countButtonLabel(label);
+                    <div className='cardActionsContainerInner'>
+                        {cardActions.map(action => {
+                            const { id, event, label, icon } = action;
                             return (
                                 <button
-                                    key={buttonClass}
-                                    className={`btnTransparent countButton ${buttonClass}`}
-                                    onClick={() => updateCount(event)}
-                                    disabled={disabled}
-                                    title={labelText}
-                                    aria-label={labelText}
+                                    key={id}
+                                    className='btnTransparent cardActionsButton'
+                                    onClick={() => event()}
+                                    title={label}
+                                    aria-label={label}
                                 >
                                     {icon}
                                 </button>
                             )
-                        }
-                    })}
+                        })}
+                    </div>
+                </div>
+                <div className='cardContainerLarge'>
+                    <div className='cardContainerLargeInner'>
+                        <img
+                            src={convertImageURL(image)}
+                            className='cardImage'
+                            alt={`Picture of ${name} card, id: ${cardID}`}
+                        />
+                    </div>
+                </div>
+                <div className='cardCountContainer'>
+                    <div className='cardCountContainerInner'>
+                        {countButtons.map(item => {
+                            if (typeof item === 'string') {
+                                return (
+                                    <div key='cardCount'>
+                                        <p>{count ? count : 0}</p>
+                                    </div>
+                                )
+                            } else {
+                                const { buttonClass, event, disabled, label, icon } = item;
+                                const labelText = countButtonLabel(label);
+                                return (
+                                    <button
+                                        key={buttonClass}
+                                        className={`btnTransparent countButton ${buttonClass}`}
+                                        onClick={() => updateCount(event)}
+                                        disabled={disabled}
+                                        title={labelText}
+                                        aria-label={labelText}
+                                    >
+                                        {icon}
+                                    </button>
+                                )
+                            }
+                        })}
+                    </div>
                 </div>
             </div>
             {cardUpdateError && <CardUpdateError setCardUpdateError={setCardUpdateError} />}
