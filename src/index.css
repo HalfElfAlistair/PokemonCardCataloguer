@@ -31,6 +31,10 @@ img {
   color: #BABABA;
 }
 
+/* Global classes */
+
+/* Global => Flex classes */
+
 .flex {
   display: flex;
 }
@@ -57,28 +61,7 @@ img {
   flex-wrap: wrap;
 }
 
-.resetPasswordLinkContainer {
-  text-align: center;
-}
-
-.passwordResetSuccess {
-  color: #A8A8A8;
-}
-
-.passwordResetLink {
-  text-decoration: none;
-  font-size: 16px;
-  text-align: center;
-  color: #A8A8A8;
-}
-
-.passwordResetLink:hover {
-  color: #FCFCFC;
-}
-
-.navLink {
-  height: 60%;
-}
+/* Global => Form classes */
 
 .accountContainer {
   height: 80vh;
@@ -86,18 +69,6 @@ img {
 
 .formGlobal {
   padding: 0 10%;
-}
-
-.w-100 {
-  width: 100%;
-}
-
-.h-100 {
-  height: 100%;
-}
-
-.w-10 {
-  width: 10%;
 }
 
 .textInputContainer {
@@ -136,12 +107,6 @@ img {
   border-radius: 10px 0 0 10px;
 }
 
-.searchSortContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .invalidFormat {
   border-color: red;
 }
@@ -157,11 +122,21 @@ img {
   color: #8e8e8e;
 }
 
-.gallerySearch {
+/* Global => Width & Height classes */
+
+.w-100 {
   width: 100%;
-  height: 10vh;
-  margin-bottom: 15px;
 }
+
+.h-100 {
+  height: 100%;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+/* Global => Button & Icon classes */
 
 .btn {
   font-size: 16px;
@@ -228,20 +203,6 @@ img {
   fill: #16C057;
 }
 
-.currentPageIcon * {
-  fill: #16C057;
-}
-
-.currentPageIcon #currentPageID {
-  stroke: #002124;
-  fill: #002124;
-}
-
-.currentPageIcon:hover * {
-  stroke: #0293a3;
-  fill: #0293a3;
-}
-
 .starIcon:hover {
   stroke: #0293a3;
 }
@@ -269,9 +230,7 @@ img {
   height: 100%;
 }
 
-.cardsListOptionsToggleButton {
-  width: 60px;
-}
+/* Global => Cards classes */
 
 .cardsList {
   width: 90%;
@@ -289,94 +248,11 @@ img {
   margin-bottom: 5%;
 }
 
-.cardsListOptions {
-  width: 100vw;
-  height: 80vh;
-}
-
-.cardsListOptionsContainer {
-  background: linear-gradient(285deg, rgba(0, 14, 15, 1) 0%, rgba(0, 33, 36, 1) 27%, rgba(0, 33, 36, 1) 77%, rgba(0, 14, 15, 1) 100%);
-  width: 100%;
-  height: 100%;
-  border-radius: 20px 20px 0 0;
-  overflow: auto;
-}
-
-.cardsListOptionsContainerInner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  overflow-y: scroll;
-  margin: 0 5%;
-  justify-content: space-evenly;
-}
-
 .cardsListSection {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.dropdownContainer {
-  width: 100%;
-}
-
-.dropdownButton {
-  font-size: 16px;
-  padding: 0 15px;
-  width: 100%;
-  height: 45px;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
-.dropdownClosed {
-  margin-bottom: 5%;
-}
-
-.dropdownListContainer {
-  z-index: 4;
-  left: 0;
-  width: 100%;
-  margin-bottom: 5vh;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.dropdownList {
-  list-style-type: none;
-  padding: 0;
-  overflow-y: scroll;
-}
-
-.dropdownListItem {
-  width: 100%;
-  height: 45px;
-  margin-bottom: 1.5px;
-  font-size: 16px;
-  color: #BABABA;
-  border-radius: 5px;
-}
-
-.dropdownListItemLabel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dropdownChecked {
-  background-color: #004C54;
-}
-
-.dropdownUnchecked {
-  background-color: #1C3A3B;
-}
-
-.hiddenCheckbox {
-  opacity: 0;
-  width: 0;
-  height: 35px;
 }
 
 .cardModal {
@@ -462,6 +338,187 @@ img {
   border-radius: 3px;
 }
 
+/* Global => Loading & Error handling classes */
+
+.PokeBallAnimationContainer {
+  animation: PokeBallAnimation 2s infinite;
+}
+
+.cardUpdateErrorContainer {
+  width: 100%;
+  min-height: 10vh;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #1C3A3B;
+}
+
+.closeCardUpdateError {
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.cardUpdateError p {
+  margin-top: 0;
+}
+
+.errorText {
+  padding: 0 5%;
+  color: #BABABA;
+}
+
+/* Account classes */
+
+.resetPasswordLinkContainer {
+  text-align: center;
+}
+
+.passwordResetLink {
+  text-decoration: none;
+  font-size: 16px;
+  text-align: center;
+  color: #A8A8A8;
+}
+
+.passwordResetLink:hover {
+  color: #FCFCFC;
+}
+
+/* Password Reset classes */
+
+.passwordResetSuccess {
+  color: #A8A8A8;
+}
+
+/* Nav classes */
+
+.navLink {
+  height: 60%;
+}
+
+.currentPageIcon * {
+  fill: #16C057;
+}
+
+.currentPageIcon #currentPageID {
+  stroke: #002124;
+  fill: #002124;
+}
+
+.currentPageIcon:hover * {
+  stroke: #0293a3;
+  fill: #0293a3;
+}
+
+/* Gallery */
+
+.searchSortContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cardsListOptionsToggleButton {
+  width: 60px;
+}
+
+.cardsListOptions {
+  width: 100vw;
+  height: 80vh;
+}
+
+.cardsListOptionsContainer {
+  background: linear-gradient(285deg, rgba(0, 14, 15, 1) 0%, rgba(0, 33, 36, 1) 27%, rgba(0, 33, 36, 1) 77%, rgba(0, 14, 15, 1) 100%);
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 20px 0 0;
+  overflow: auto;
+}
+
+.cardsListOptionsContainerInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: scroll;
+  margin: 0 5%;
+  justify-content: space-evenly;
+}
+
+.dropdownContainer {
+  width: 100%;
+}
+
+.dropdownButton {
+  font-size: 16px;
+  padding: 0 15px;
+  width: 100%;
+  height: 45px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.dropdownClosed {
+  margin-bottom: 5%;
+}
+
+.dropdownListContainer {
+  z-index: 4;
+  left: 0;
+  width: 100%;
+  margin-bottom: 5vh;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.dropdownList {
+  list-style-type: none;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+.dropdownListItem {
+  width: 100%;
+  height: 45px;
+  margin-bottom: 1.5px;
+  font-size: 16px;
+  color: #BABABA;
+  border-radius: 5px;
+}
+
+.dropdownListItemLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdownChecked {
+  background-color: #004C54;
+}
+
+.dropdownUnchecked {
+  background-color: #1C3A3B;
+}
+
+.hiddenCheckbox {
+  opacity: 0;
+  width: 0;
+  height: 35px;
+}
+
+.CardsListOptionsToggleContainer {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Search */
+
 .searchPageContentContainer,
 .searchFormatSelector {
   width: 100%;
@@ -509,44 +566,7 @@ img {
   border-radius: 10px 0 0 10px;
 }
 
-.PokeBallAnimationContainer {
-  animation: PokeBallAnimation 2s infinite;
-}
-
-.cardUpdateErrorContainer {
-  width: 100%;
-  min-height: 10vh;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #1C3A3B;
-}
-
-.closeCardUpdateError {
-  height: 5vh;
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.cardUpdateError p {
-  margin-top: 0;
-}
-
-.errorText {
-  padding: 0 5%;
-  color: #BABABA;
-}
-
-.sortFilterToggleContainer {
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* Animations */
 
 @keyframes PokeBallAnimation {
   0% {
@@ -569,6 +589,8 @@ img {
     transform: rotate(0deg);
   }
 }
+
+/* Media Querys */
 
 @media only screen and (min-width: 400px) {
   .formGlobal {
