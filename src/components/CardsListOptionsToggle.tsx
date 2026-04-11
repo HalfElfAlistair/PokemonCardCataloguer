@@ -6,7 +6,7 @@ export const CardsListOptionsToggle = () => {
     const { cardsListOptionsOpen, toggleCardsListOptionsState } = useSortFilterStates();
     const labelText = `Press to ${cardsListOptionsOpen ? 'close' : 'open'} menu for search, sort, and filtering`;
     return (
-        <div className='sortFilterToggleContainer'>
+        <div className='CardsListOptionsToggleContainer'>
             <button
                 className='btnTransparent cardsListOptionsToggleButton'
                 onClick={() => toggleCardsListOptionsState()}
