@@ -403,10 +403,14 @@ img {
   flex-wrap: wrap;
 }
 
-.cardCountContainer,
-.cardActionsContainer {
+.cardActionsContainer,
+.cardCountContainer {
   width: 100%;
   height: 10vh;
+}
+
+.cardCountContainer {
+  margin-bottom: 10vh;
 }
 
 .cardActionsContainer,
@@ -415,8 +419,6 @@ img {
   display: flex;
   align-items: center;
 }
-
-
 
 .cardCountContainerInner,
 .cardActionsContainerInner {
@@ -444,7 +446,7 @@ img {
 }
 
 .cardContainerLarge {
-  height: 80vh;
+  height: 70vh;
 }
 
 .cardContainerLargeInner {
